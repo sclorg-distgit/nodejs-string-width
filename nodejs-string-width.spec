@@ -9,7 +9,7 @@
 
 Name:		%{?scl_prefix}nodejs-string-width
 Version:	1.0.1
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Get the visual width of a string
 
 License:	MIT
@@ -18,7 +18,7 @@ Source0:	https://registry.npmjs.org/%{packagename}/-/%{packagename}-%{version}.t
 # Get the test from the upstream repo, as the npm tarball doesn't contain tests
 Source1:	https://raw.githubusercontent.com/sindresorhus/string-width/f279cfd14835f0a3c8df69ba18e9a3960156e135/test.js
 
-
+BuildRequires:  %{?scl_prefix}nodejs-devel
 ExclusiveArch:	%{nodejs_arches} noarch
 BuildArch:	noarch
 
@@ -42,7 +42,7 @@ mkdir -p %{buildroot}%{nodejs_sitelib}/%{packagename}
 cp -pr package.json index.js \
 	%{buildroot}%{nodejs_sitelib}/%{packagename}
 
-#%nodejs_symlink_deps
+%nodejs_symlink_deps
 
 #%check
 #%nodejs_symlink_deps --check
@@ -60,6 +60,9 @@ cp -pr package.json index.js \
 %{nodejs_sitelib}/%{packagename}
 
 %changelog
+* Mon Jan 23 2017 Zuzana Svetlikova <zsvetlik@redhat.com> - 1.0.1-4
+- Add missing nodejs-devel build dep
+
 * Thu Sep 15 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 1.0.1-3
 - Built for RHSCL
 - Remove %%BuildRequires
